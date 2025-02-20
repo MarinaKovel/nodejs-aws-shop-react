@@ -1,3 +1,9 @@
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+
 # Logs
 logs
 *.log
@@ -13,6 +19,8 @@ coverage
 dist
 dist-ssr
 *.local
+!jest.config.js
+*.d.ts
 
 # Editor directories and files
 .vscode/*
