@@ -24,8 +24,8 @@ export default function Products() {
             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
             <CardMedia
-              sx={{ pt: "56.25%" }}
-              image={`https://source.unsplash.com/random?sig=${index}`}
+              sx={{ pt: "56.25%", backgroundSize: "contain" }}
+              image={`https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/refs/heads/main/aws-pictures/${index + 1}.jpg`}
               title="Image title"
             />
             <CardContent sx={{ flexGrow: 1 }}>
