@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "bin": {
-    "nodejs-aws-shop-react": "bin/nodejs-aws-shop-react.js"
+    "nodejs-aws-shop-react": "bin/nodejs-aws-shop-react.ts"
   },
   "scripts": {
     "start": "vite",
