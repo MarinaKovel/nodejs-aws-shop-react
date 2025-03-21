@@ -23,7 +23,15 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
           params: { name: fileName },
           headers,
         })
-        .then((res) => res.data);
+        .then((res) => res.data)
+        .catch((error) => {
+          if (error.response?.status === 401) {
+            window.dispatchEvent(new CustomEvent("global-toast", { detail: { message: "401 Unauthorized", severity: "error" } }));
+          }
+          if (error.response?.status === 403) {
+            window.dispatchEvent(new CustomEvent("global-toast", { detail: { message: "403 Forbidden", severity: "error" } }));
+          }
+    });
     }
   );
 

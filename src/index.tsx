@@ -11,7 +11,6 @@ import {
 } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { theme } from "~/theme";
-import { AxiosError } from "axios";
 import "headers-polyfill";
 import ToastProvider from "./components/ToastProvider/ToastProvider";
 
@@ -21,25 +20,11 @@ const queryClient = new QueryClient({
   },
   mutationCache: new MutationCache({
     onError: (error: any) => {
-      window.dispatchEvent(new CustomEvent("global-toast", { detail: { message: error.message, severity: "error" } }));
-      if (error instanceof AxiosError) {
-        if (error.response?.status === 401) {
-          window.dispatchEvent(new CustomEvent("global-toast", { detail: { message: "401 Unauthorized", severity: "error" } }));
-          console.log("401 Unauthorized", "error");
-        }
-        if (error.response?.status === 403) {
-          window.dispatchEvent(new CustomEvent("global-toast", { detail: { message: "403 Forbidden", severity: "error" } }));
-          console.log("403 Forbidden", "error");
-        }
-      }
+       window.dispatchEvent(new CustomEvent("global-toast", { detail: { message: error.message, severity: "error" } }));
     },
   }),
 });
 
-if (import.meta.env.DEV) {
-  const { worker } = await import("./mocks/browser");
-  worker.start({ onUnhandledRequest: "bypass" });
-}
 
 const container = document.getElementById("app");
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
