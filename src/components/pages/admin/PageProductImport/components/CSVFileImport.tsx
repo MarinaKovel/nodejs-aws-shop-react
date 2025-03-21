@@ -12,16 +12,16 @@ type CSVFileImportProps = {
 export default function CSVFileImport({ url, title }: CSVFileImportProps) {
   const [file, setFile] = React.useState<File>();
 
+  const authToken = localStorage.getItem("authorization_token")
+  let headers: any = {}
+  if (authToken) headers.Authorization = `Basic ${localStorage.getItem("authorization_token")}`;
+
   const { mutateAsync: preSignFileImportUrl } = useMutation<string, AxiosError, { url: string; fileName: string }>(
     async ({ url, fileName }: { url: string; fileName: string }) => {
       return axios
         .get(url, {
-          params: {
-            name: fileName,
-          },
-          headers: {
-            Authorization: `Basic ${localStorage.getItem("authorization_token")}`,
-          },
+          params: { name: fileName },
+          headers,
         })
         .then((res) => res.data);
     }
