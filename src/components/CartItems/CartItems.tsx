@@ -14,7 +14,7 @@ type CartItemsProps = {
 
 export default function CartItems({ items, isEditable }: CartItemsProps) {
   const { data = [] } = useAvailableProducts();
-  const fullCartItems = items.map(item => ({ count: item.count, product: data?.find((prod) => item?.product_id === prod.id)}))
+  const fullCartItems = items.map(item => ({ count: item.count, product: data?.find((prod) => item?.product_id === prod?.id) || null}))
   
   const totalPrice: number = fullCartItems.reduce(
     (total, item) => item.count * (item.product?.price || 0) + total,
@@ -24,10 +24,10 @@ export default function CartItems({ items, isEditable }: CartItemsProps) {
   return (
     <>
       <List disablePadding>
-        {fullCartItems.map((cartItem) => (
+        {fullCartItems && fullCartItems.map((cartItem, i) => (
           <ListItem
             sx={{ padding: (theme) => theme.spacing(1, 0) }}
-            key={cartItem.product?.id}
+            key={cartItem.product?.id || 0 + i}
           >
             {isEditable && <AddProductToCart product={cartItem.product!} />}
             <ListItemText
