@@ -25,7 +25,7 @@ export default function Products() {
           >
             <CardMedia
               sx={{ pt: "56.25%", backgroundSize: "contain" }}
-              image={`https://raw.githubusercontent.com/MarinaKovel/onlinestoredata/refs/heads/main/aws-pictures/${product.id}.jpg`}
+              image={product.image || ''}
               title="Image title"
             />
             <CardContent sx={{ flexGrow: 1 }}>
