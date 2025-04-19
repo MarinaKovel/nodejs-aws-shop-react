@@ -9,7 +9,7 @@ export default function Cart() {
   const badgeContent = data.length || undefined;
 
   return (
-    <IconButton color="inherit" component={Link} to="/cart" size="large">
+    <IconButton color="inherit" component={Link} to="/carts" size="large">
       <Badge badgeContent={badgeContent} color="secondary">
         <CartIcon />
       </Badge>

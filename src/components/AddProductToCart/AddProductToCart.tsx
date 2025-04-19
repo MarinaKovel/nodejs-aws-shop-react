@@ -11,10 +11,22 @@ type AddProductToCartProps = {
 };
 
 export default function AddProductToCart({ product }: AddProductToCartProps) {
-  const { data = [], isFetching } = useCart();
+  const { data, isFetching, error } = useCart();
   const { mutate: upsertCart } = useUpsertCart();
   const invalidateCart = useInvalidateCart();
-  const cartItem = data.find((i) => i.product_id === product?.id);
+
+  const cartItems = Array.isArray(data) ? data : [];
+  const cartItem = cartItems.find((i) => i.product_id === product?.id);
+
+  // Error handling
+  if (error) {
+    console.error('Cart loading error:', error);
+    return (
+      <IconButton disabled size="large">
+        <CartIcon color="disabled" />
+      </IconButton>
+    );
+  }
 
   const addProduct = () => {
     upsertCart(

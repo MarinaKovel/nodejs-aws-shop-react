@@ -96,6 +96,15 @@ export default function PageProductForm() {
                     required
                   />
                 </Grid>
+                <Grid item xs={12}>
+                  <Field
+                    component={TextField}
+                    name="image"
+                    label="Image URL"
+                    fullWidth
+                    autoComplete="off"
+                  />
+                </Grid>
                 <Grid item container xs={12} justifyContent="space-between">
                   <Button
                     color="primary"
